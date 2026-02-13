@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: '3'
+
+vars:
+  SERVICE: cratos-ui
+
+tasks:
+  default:
+    desc: Cratos UI – help
+    cmds:
+      - task --list
+
+  install:
+    desc: Install dependencies
+    cmds:
+      - npm install
+
+  dev:
+    desc: Start development server
+    cmds:
+      - npm run dev
+
+  build:
+    desc: Build the Docker image
+    cmds:
+      - docker compose build
+
+  up:
+    desc: Start the Docker container
+    cmds:
+      - docker compose up -d
+      - echo "Cratos UI is running on http://localhost:3001"
+
+  down:
+    desc: Stop the Docker container
+    cmds:
+      - docker compose down
+
+  restart:
+    desc: Restart the Docker container
+    cmds:
+      - docker compose restart
+
+  logs:
+    desc: Tail logs from the container
+    cmds:
+      - docker compose logs -f {{.SERVICE}}
+
+  clean:
+    desc: Stop containers and remove images
+    cmds:
+      - docker compose down -v --rmi local
+
